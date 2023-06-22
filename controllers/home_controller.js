@@ -13,6 +13,9 @@ module.exports.total_item_api = async function (req, res) {
     if (!endDate) {
       return res.json({ msg: "endDate not provided" });
     }
+    if(startDate>endDate){
+      return res.json({ msg: "Start date provided is greater than end date" });
+    }
 
     for (let i = 0; i < data.length; i++) {
       const obj = data[i];
@@ -52,6 +55,9 @@ module.exports.nth_most_total_item_api = async function (req, res) {
     }
     if (!endDate) {
       return res.json({ msg: "endDate not provided" });
+    }
+    if(startDate>endDate){
+      return res.json({ msg: "Start date provided is greater than end date" });
     }
     if (!n) {
       return res.json({ msg: "nth not provided" });
@@ -108,7 +114,9 @@ module.exports.percentage_of_department_wise_sold_item_api = async function (
     if (!endDate) {
       return res.json({ msg: "endDate not provided" });
     }
-
+if(startDate>endDate){
+      return res.json({ msg: "Start date provided is greater than end date" });
+    }
     const filteredData = data.filter((item) => {
       const itemDate = new Date(item.date);
       return itemDate >= new Date(startDate) && itemDate <= new Date(endDate);
